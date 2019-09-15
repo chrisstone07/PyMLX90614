@@ -1,4 +1,3 @@
-from smbus2 import SMBus
 from time import sleep
 
 
@@ -43,10 +42,9 @@ class MLX90614():
     comm_retries = 5
     comm_sleep_amount = 0.1
 
-    def __init__(self, address=0x5A, bus_num=1):
-        self.bus_num = bus_num
+    def __init__(self, bus, address=0x5A):
+        self.bus = bus
         self.address = address
-        self.bus = SMBus(bus=bus_num)
 
     def read_reg(self, reg_addr):
         err = None
@@ -76,9 +74,3 @@ class MLX90614():
 
     def get_object_2(self):
         return self.read_temp(self.MLX90614_TOBJ2)
-
-
-if __name__ == "__main__":
-    sensor = MLX90614()
-    print(sensor.get_amb_temp())
-    print(sensor.get_obj_temp())
