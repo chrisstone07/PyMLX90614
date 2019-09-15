@@ -30,7 +30,7 @@ class MLX90614():
     # Configuration register
     MLX90614_CONFIG = 0x25
     # Slave address register
-    MLX90614_ADDR = 0x0E
+    MLX90614_ADDR = 0x2E
     # 1 ID register (read-only)
     MLX90614_ID1 = 0x3C
     # 2 ID register (read-only)
