@@ -63,17 +63,19 @@ class MLX90614():
         # So let's just re-raise the last IOError we got
         raise err
 
-    def data_to_temp(self, data):
+    def read_temp(self, reg):
+        data = self.read_reg(reg)
         temp = (data * 0.02) - 273.15
         return temp
 
-    def get_amb_temp(self):
-        data = self.read_reg(self.MLX90614_TA)
-        return self.data_to_temp(data)
+    def get_ambient(self):
+        return self.read_temp(self.MLX90614_TA)
 
-    def get_obj_temp(self):
-        data = self.read_reg(self.MLX90614_TOBJ1)
-        return self.data_to_temp(data)
+    def get_object_1(self):
+        return self.read_temp(self.MLX90614_TOBJ1)
+
+    def get_object_2(self):
+        return self.read_temp(self.MLX90614_TOBJ2)
 
 
 if __name__ == "__main__":
