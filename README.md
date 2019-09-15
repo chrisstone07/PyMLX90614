@@ -3,11 +3,28 @@ Python library for MLX90614 infrared temperature sensors, using [smbus2](https:/
 
 You might need to enter this command on your Raspberry Pi:
 
-`echo "Y" > /sys/module/i2c_bcm2708/parameters/combined`
+`sudo su -c 'echo "Y" > /sys/module/i2c_bcm2708/parameters/combined'`
 
-(Consider putting it in rc.local so it's executed each bootup)
+Consider putting it in `/etc/rc.local` so it's executed each bootup
 
 ## Usage
+
+First, ensure the device is available on the i2c bus:
+
+```
+$ sudo i2cdetect -y 1
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:          -- -- -- -- -- -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- 5a -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: -- -- -- -- -- -- -- --
+```
+
+Within Python, the device can be used like this:
 
 ```python
 sensor = MLX90614(0x5A)
